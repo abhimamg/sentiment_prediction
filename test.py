@@ -1,4 +1,6 @@
 import streamlit as st
+st.set_page_config(page_title="Sentiment Analyzer")
+
 import pandas as pd
 import numpy as np
 
