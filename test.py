@@ -18,7 +18,7 @@ filename = 'cv.sav'
 cv = pickle.load(open(path+filename, 'rb'))
 
 
-text_inp = [st.text_input('Enter Text', "I love this food")]
+text_inp = [st.text_input('Enter Text', "I love the pizza")]
 
 
 tranformed_text = cv.transform(text_inp)
