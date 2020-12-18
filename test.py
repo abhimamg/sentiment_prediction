@@ -2,26 +2,37 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 
+from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
+vader = SentimentIntensityAnalyzer()
 
 st.write("""
-# Cathodic Protection Design. Khoya khoya chand. KHula aasmaan.
-## DNVGL-RP-F103
+# Assessemnt 3: Sentiment Prediction
+### Submitted by: Abhishek Mamgain
+#
 """)
 
-st.sidebar.header('User Input Parameters')
+
+text_inp = st.text_input(
+    'Enter Text', "I really like this food")
+
+score = vader.polarity_scores(text_inp)
+
+comp_score = score["compound"]
+pos_score = round(score["pos"]*100,2)
+neg_score = round(score["neg"]*100,2)
+neu_score = round(score["neu"]*100,2)
+pos_message = "Confidence = {}%".format(pos_score)
+neg_message = "Confidence = {}%".format(neg_score)
+neu_message = "Confidence = {}%".format(neu_score)
 
 
-
-uploaded_file = st.sidebar.file_uploader("Choose a CSV file", type="csv")
-if uploaded_file is None:
-    data = pd.read_csv("data.csv")
-else:
-    data = pd.read_csv(uploaded_file)
-
-if st.checkbox('Show Input'): st.table(data)
-
-aa = st.selectbox(
-    'How would you like to be contacted?',
-    ('Email', 'Home phone', 'Mobile phone'))
-
-st.write(np.random.randn(5, 3))
+if st.button('Classify Text'):
+    if pos_score > 0.4:
+        st.success("Sentiment: Positive")
+        st.info(pos_message)
+    elif neg_score > 0.4:
+        st.error("Sentiment = Negative")
+        st.info(neg_message)     
+    else:
+        st.warning("Sentiment = Neutral")
+        st.info(neu_message)  
