@@ -1,9 +1,0 @@
-Case ID,ID,"10"" Prod - Coated","10"" Prod - Bare","8"" Water Injection"
-Pipeline Type,pipe,Single Pipe,Single Pipe,Single Pipe
-Pipeline Length [m],L,10000,10000,10000
-OD [mm],od,273.1,273.1,219.1
-WT [mm],wt,17.5,17.5,20.3
-Joint Length [m],jl,12.2,12.2,12.2
-Design Life [Yrs],life,25,25,25
-Design Factor,k,1.1,1.1,1.1
-
