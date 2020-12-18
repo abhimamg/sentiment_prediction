@@ -4,7 +4,7 @@ import pickle
 path = ""
 
 st.write("""
-# Assessemnt 3: Sentiment Prediction
+# Sentiment Prediction
 ## Submitted by: Abhishek Mamgain
 ### Selected Model:  Logistic Regression with Count Vectorizer
 #
