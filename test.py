@@ -10,6 +10,12 @@ st.write("""
 #
 """)
 
+#NLTK
+from nltk.tokenize import RegexpTokenizer
+from nltk.corpus import stopwords
+from nltk.stem.snowball import SnowballStemmer
+import nltk
+nltk.download('stopwords')
 
 filename = 'lr_model.sav'
 lr_model = pickle.load(open(path+filename, 'rb'))
@@ -17,10 +23,29 @@ lr_model = pickle.load(open(path+filename, 'rb'))
 filename = 'cv.sav'
 cv = pickle.load(open(path+filename, 'rb'))
 
+text_inp = st.text_input('Enter Text', "I love the pizza")
 
-text_inp = [st.text_input('Enter Text', "I love the pizza")]
+###########################
+tokenizer = RegexpTokenizer("[a-zA-Z@]+") # We only want words in text as punctuation and numbers are not helpful
+en_stopwords = set(stopwords.words("english"))
+ss = SnowballStemmer("english")
+def clean_up(sentence):
+    sentence  = tokenizer.tokenize(sentence) # Conerting in regualr expression
+    sentence = [ss.stem(w) for w in sentence if w not in stop  ]  # Stemming and removing stop words
+    return " ".join(sentence) # returning the sentence in the form of a string
 
-tranformed_text = cv.transform(text_inp)
+stop = stopwords.words('english') 
+
+excluding = ['against','not','don', "don't",'ain', 'aren', "aren't", 'couldn', "couldn't", 'didn', "didn't",
+             'doesn', "doesn't", 'hadn', "hadn't", 'hasn', "hasn't", 'haven', "haven't", 'isn', "isn't", 
+             'mightn', "mightn't", 'mustn', "mustn't", 'needn', "needn't",'shouldn', "shouldn't", 'wasn',
+             "wasn't", 'weren', "weren't", 'won', "won't", 'wouldn', "wouldn't", "no", ]
+stop = [words for words in stop if words not in excluding]
+
+text_inp = clean_up(text_inp)
+###############################   
+    
+tranformed_text = cv.transform([text_inp])
 
 result = lr_model.predict(tranformed_text)
 prob = lr_model.predict_proba(tranformed_text).max().round(4)
