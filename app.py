@@ -14,7 +14,7 @@ nltk.download('stopwords')
 st.write("""
 # Sentiment Prediction
 ## Submitted by: Abhishek Mamgain
-### Selected Model:  Logistic Regression with Count Vectorizer
+### Selected Model:  Logistic Regression with TF-IDF
 #
 """)
 
