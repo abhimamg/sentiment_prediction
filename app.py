@@ -3,6 +3,14 @@ st.set_page_config(page_title="Sentiment Analyzer")
 import pickle
 path = ""
 
+#NLTK
+from nltk.tokenize import RegexpTokenizer
+from nltk.corpus import stopwords
+from nltk.stem.snowball import SnowballStemmer
+import nltk
+nltk.download('stopwords'
+
+
 st.write("""
 # Sentiment Prediction
 ## Submitted by: Abhishek Mamgain
@@ -10,12 +18,7 @@ st.write("""
 #
 """)
 
-#NLTK
-from nltk.tokenize import RegexpTokenizer
-from nltk.corpus import stopwords
-from nltk.stem.snowball import SnowballStemmer
-import nltk
-nltk.download('stopwords')
+)
 
 filename = 'lr_model.sav'
 lr_model = pickle.load(open(path+filename, 'rb'))
@@ -40,6 +43,7 @@ excluding = ['against','not','don', "don't",'ain', 'aren', "aren't", 'couldn', "
              'doesn', "doesn't", 'hadn', "hadn't", 'hasn', "hasn't", 'haven', "haven't", 'isn', "isn't", 
              'mightn', "mightn't", 'mustn', "mustn't", 'needn', "needn't",'shouldn', "shouldn't", 'wasn',
              "wasn't", 'weren', "weren't", 'won', "won't", 'wouldn', "wouldn't", "no", ]
+
 stop = [words for words in stop if words not in excluding]
 
 text_inp = clean_up(text_inp)
